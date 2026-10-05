@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="tab-title">Study Portal Dashboard</title>
+    <!-- Canvas standard favicon -->
+    <link id="tab-icon" rel="icon" type="image/x-icon" href="https://cloudfront.net">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #00ff88;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+        .panic-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto 20px auto;
+            background: #1e1e1e;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+        .panic-btn {
+            background-color: #ff3333;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .panic-btn:hover {
+            background-color: #cc0000;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background-color: #1e1e1e;
+            border: 2px solid #333;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff88;
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+        }
+        .card h3 {
+            margin: 10px 0 0 0;
+            font-size: 1.1rem;
+        }
+        .icon {
+            font-size: 2.5rem;
+        }
+        
+        /* ---------------------------------- */
+        /* Hidden Canvas Assignment Mask      */
+        /* ---------------------------------- */
+        #panic-screen {
+            display: none;
+            background-color: #ffffff;
+            color: #2d3b45;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 99999;
+            font-family: "LatoWeb", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+        .canvas-sidebar {
+            width: 84px;
+            background-color: #1e355b; /* Canvas default dark blue */
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+        }
+        .canvas-icon-block {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            margin-bottom: 25px;
+        }
+        .canvas-main {
+            margin-left: 110px;
+            padding: 40px;
+            max-width: 900px;
+        }
+        .canvas-header {
+            border-bottom: 1px solid #c7d1d8;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .canvas-title {
+            font-size: 2.25rem;
+            color: #2d3b45;
+            margin: 0 0 10px 0;
+            font-weight: 300;
+        }
+        .canvas-meta {
+            display: flex;
+            gap: 30px;
+            font-size: 0.9rem;
+            color: #596b7a;
+            border-bottom: 1px solid #e1e6e9;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .canvas-body h3 {
+            font-size: 1.25rem;
+            border-bottom: 1px solid #e1e6e9;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        .canvas-input-box {
+            width: 100%;
+            height: 150px;
+            border: 1px solid #b4c0ca;
+            border-radius: 4px;
+            margin-top: 15px;
+            padding: 10px;
+            box-sizing: border-box;
+            background: #fafafa;
+        }
+        .canvas-btn {
+            background-color: #008a32;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Dashboard -->
+    <div id="main-content">
+        <div class="panic-header">
+            <span>💡 Pro-tip: Press the <strong>ESC</strong> key at any time to instantly switch to Canvas.</span>
+            <button class="panic-btn" onclick="triggerPanic()">PANIC BUTTON</button>
+        </div>
+
+        <h1>Study Portal Dashboard</h1>
+
+        <div class="grid">
+            <!-- Action / Arcade -->
+            <a class="card" href="https://geometrydash.io" target="_blank">
+                <div class="icon">🔺</div><h3>Geometry Dash</h3>
+            </a>
+            <a class="card" href="https://github.io" target="_blank">
+                <div class="icon">🟢</div><h3>Slope</h3>
+            </a>
+            <a class="card" href="https://github.io" target="_blank">
+                <div class="icon">🏃</div><h3>Run 3</h3>
+            </a>
+            <a class="card" href="https://github.io" target="_blank">
+                <div class="icon">🌀</div><h3>Tunnel Rush</h3>
+            </a>
+            <a class="card" href="https://github.io" target="_blank">
+                <div class="icon">🛹</div><h3>Subway Surfers</h3>
+            </a>
+
+            <!-- IO Games -->
+            <a class="card" href="https://slither.io" target="_blank">
+                <div class="icon">🐍</div><h3>Slither.io</h3>
+            </a>
+            <a class="card" href="https://paper-io.com" target="_blank">
+                <div class="icon">🧻</div><h3>Paper.io 2</h3>
+            </a>
+            <a class="card" href="https://wings.io" target="_blank">
+                <div class="icon">🛩️</div><h3>Wings.io</h3>
+            </a>
+            <a class="card" href="https://powerline.io" target="_blank">
+                <div class="icon">⚡</div><h3>Powerline.io</h3>
+            </a>
+
+            <!-- Sports / Skill -->
+            <a class="card" href="https://github.io" target="_blank">
+                <div class="icon">🏀</div><h3>Basket Random</h3>
+            </a>
+            <a class="card" href="https://github.io" target="_blank">
+                <div class="icon">🏈</div><h3>Retro Bowl</h3>
+            </a>
+            <a class="card" href="https://github.io" target="_blank">
+                <div class="icon">🏍️</div><h3>Moto X3M</h3>
+            </a>
+            <a class="card" href="https://github.io" target="_blank">
+                <div class="icon">🛻</div><h3>Drive Mad</h3>
+            </a>
+
+            <!-- Puzzle / Strategy -->
+            <a class="card" href="https://play2048.co" target="_blank">
+                <div class="icon">🔢</div><h3>2048</h3>
+            </a>
+            <a class="card" href="https://github.io" target="_blank">
+                <div class="icon">🍪</div><h3>Cookie Clicker</h3>
+            </a>
+            <a class="card" href="https://github.io" target="_blank">
+                <div class="icon">♿</div><h3>Happy Wheels</h3>
+            </a>
+            <a class="card" href="https://github.io" target="_blank">
+                <div class="icon">💼</div><h3>BitLife</h3>
+            </a>
+            <a class="card" href="https://github.io" target="_blank">
+                <div class="icon">🟥</div><h3>World's Hardest Game</h3>
+            </a>
+        </div>
+    </div>
+
+    <!-- Hidden Fake Canvas Assignment Page -->
+    <div id="panic-screen">
+        <div class="canvas-sidebar">
+            <div class="canvas-icon-block" style="background: #e02229; border-radius: 50%;"></div><!-- Fake Canvas Logo -->
+            <div class="canvas-icon-block"></div>
+            <div class="canvas-icon-block"></div>
+            <div class="canvas-icon-block"></div>
+            <div class="canvas-icon-block"></div>
+        </div>
+        
+        <div class="canvas-main">
+            <div class="canvas-header">
+                <nav style="font-size: 0.85rem; color: #008ee6; margin-bottom: 10px;">Courses &gt; Algebra II &gt; Assignments</nav>
+                <h1 class="canvas-title">Module 3: Linear Equations Practice</h1>
+            </div>
+
+            <div class="canvas-meta">
+                <span><strong>Due</strong> No Due Date</span>
+                <span><strong>Points</strong> 25</span>
+                <span><strong>Submitting</strong> A Text Entry Box</span>
+            </div>
+
+            <div class="canvas-body">
+                <p>Please review the core concepts in Chapter 4 before attempting this task. Complete the work independently and type your answers in the submission window below.</p>
+                
+                <h3>Instructions:</h3>
+                <p>1. Find the slope of the line passing through the points (2, 5) and (4, 11).</p>
