@@ -3,81 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="tab-title">Study Portal Dashboard</title>
-    <!-- Canvas standard favicon -->
+    <title id="tab-title">NEXUS_BYPASS // Core Matrix</title>
+    <!-- Canvas standard favicon for disguise trigger -->
     <link id="tab-icon" rel="icon" type="image/x-icon" href="https://cloudfront.net">
     <style>
+        :root {
+            --bg-black: #0a0a0c;
+            --card-black: #111216;
+            --neon-green: #00ff66;
+            --neon-blue: #00bfff;
+            --border-gray: #22252e;
+            --text-gray: #8a92a6;
+        }
+
         body {
-            background-color: #121212;
+            background-color: var(--bg-black);
             color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Consolas', 'Courier New', Courier, monospace;
             margin: 0;
             padding: 20px;
         }
-        h1 {
+
+        header {
             text-align: center;
-            color: #00ff88;
-            font-size: 2.5rem;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--border-gray);
+            padding-bottom: 20px;
         }
+
+        h1 {
+            color: var(--neon-blue);
+            font-size: 2.2rem;
+            margin: 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(0, 191, 255, 0.4);
+        }
+
+        .subtitle {
+            color: var(--neon-green);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
         .panic-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto 20px auto;
-            background: #1e1e1e;
-            padding: 10px 20px;
-            border-radius: 8px;
-            border: 1px solid #333;
+            background: var(--card-black);
+            padding: 12px 20px;
+            border-radius: 6px;
+            border: 1px solid var(--border-gray);
+            font-size: 0.85rem;
         }
+
+        .panic-alert {
+            color: #ff3333;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
         .panic-btn {
-            background-color: #ff3333;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 5px;
+            background-color: transparent;
+            color: #ff3333;
+            border: 1px solid #ff3333;
+            padding: 6px 14px;
+            border-radius: 4px;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.2s;
+            font-family: monospace;
+            transition: all 0.2s;
         }
+
         .panic-btn:hover {
-            background-color: #cc0000;
+            background-color: #ff3333;
+            color: white;
+            box-shadow: 0 0 10px rgba(255, 51, 51, 0.5);
         }
+
+        .category-title {
+            max-width: 1400px;
+            margin: 30px auto 15px auto;
+            color: #ffffff;
+            font-size: 1.2rem;
+            border-left: 4px solid var(--neon-green);
+            padding-left: 10px;
+            text-transform: uppercase;
+        }
+
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 15px;
+            max-width: 1400px;
             margin: 0 auto;
         }
+
         .card {
-            background-color: #1e1e1e;
-            border: 2px solid #333;
-            border-radius: 12px;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            background-color: var(--card-black);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 16px;
             text-decoration: none;
             color: white;
-            display: block;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.25s ease;
         }
+
         .card:hover {
-            transform: translateY(-5px);
-            border-color: #00ff88;
-            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+            transform: translateY(-3px);
+            border-color: var(--neon-green);
+            box-shadow: 0 4px 15px rgba(0, 255, 102, 0.15);
         }
+
         .card h3 {
-            margin: 10px 0 0 0;
-            font-size: 1.1rem;
+            margin: 0 0 8px 0;
+            font-size: 1.05rem;
+            color: var(--neon-blue);
         }
-        .icon {
-            font-size: 2.5rem;
+
+        .card p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            line-height: 1.4;
         }
-        
+
+        .card .tag {
+            align-self: flex-start;
+            font-size: 0.7rem;
+            background: rgba(0, 255, 102, 0.1);
+            color: var(--neon-green);
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
         /* ---------------------------------- */
-        /* Hidden Canvas Assignment Mask      */
+        /* Canvas Cloak Display Settings     */
         /* ---------------------------------- */
         #panic-screen {
             display: none;
@@ -95,11 +168,9 @@
         }
         .canvas-sidebar {
             width: 84px;
-            background-color: #1e355b; /* Canvas default dark blue */
+            background-color: #1e355b;
             position: fixed;
-            top: 0;
-            left: 0;
-            bottom: 0;
+            top: 0; left: 0; bottom: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -167,104 +238,46 @@
 </head>
 <body>
 
-    <!-- Main Dashboard -->
+    <!-- Active Core Interface -->
     <div id="main-content">
         <div class="panic-header">
-            <span>💡 Pro-tip: Press the <strong>ESC</strong> key at any time to instantly switch to Canvas.</span>
-            <button class="panic-btn" onclick="triggerPanic()">PANIC BUTTON</button>
+            <span class="panic-alert">⚠️ WARNING: ESCAPE KEYBINDS ARMED. PRESS 'ESC' KEY TO MASQUERADE ACTIVE SESSION.</span>
+            <button class="panic-btn" onclick="triggerPanic()">FORCE MASK</button>
         </div>
 
-        <h1>Study Portal Dashboard</h1>
+        <header>
+            <h1>NEXUS_BYPASS // Core Matrix</h1>
+            <div class="subtitle">Decentralized Web Index Hub // Anti-Filter Network Framework</div>
+        </header>
 
+        <!-- CATEGORY 1 -->
+        <div class="category-title">01 // GitHub & Node Content Streams</div>
         <div class="grid">
-            <!-- Action / Arcade -->
-            <a class="card" href="https://geometrydash.io" target="_blank">
-                <div class="icon">🔺</div><h3>Geometry Dash</h3>
+            <a class="card" href="https://coolunblockedgames.github.io/" target="_blank">
+                <h3>CoolUBG Mirror</h3><p>Fast delivery node hosting simple physics and flash retro emulation ports.</p><div class="tag">GH Pages</div>
             </a>
-            <a class="card" href="https://github.io" target="_blank">
-                <div class="icon">🟢</div><h3>Slope</h3>
+            <a class="card" href="https://sz-games.github.io" target="_blank">
+                <h3>SZ-Games Core</h3><p>Raw text interface connecting dozens of compressed puzzle engines.</p><div class="tag">GH Pages</div>
             </a>
-            <a class="card" href="https://github.io" target="_blank">
-                <div class="icon">🏃</div><h3>Run 3</h3>
+            <a class="card" href="https://cattn.github.io/gba/" target="_blank">
+                <h3>Cattn GBA Node</h3><p>Direct system stream running native GameBoy Advance system saves.</p><div class="tag">GH Pages</div>
             </a>
-            <a class="card" href="https://github.io" target="_blank">
-                <div class="icon">🌀</div><h3>Tunnel Rush</h3>
+            <a class="card" href="https://picklekid31.github.io/GBA-unblocked-games/" target="_blank">
+                <h3>Pickle GBA Vault</h3><p>Secondary emulator architecture tracking retro console file arrays.</p><div class="tag">GH Pages</div>
             </a>
-            <a class="card" href="https://github.io" target="_blank">
-                <div class="icon">🛹</div><h3>Subway Surfers</h3>
+            <a class="card" href="https://mathadventure1.github.io/sm64/sm64/index.html" target="_blank">
+                <h3>SM64 Engine WebGL</h3><p>High frame-rate 3D viewport tracking web-compiled assets.</p><div class="tag">GH Pages</div>
             </a>
-
-            <!-- IO Games -->
-            <a class="card" href="https://slither.io" target="_blank">
-                <div class="icon">🐍</div><h3>Slither.io</h3>
+            <a class="card" href="https://28klotlucas2.github.io/Mario64webgl/" target="_blank">
+                <h3>Lucas WebGL Matrix</h3><p>Alternative graphics channel for direct desktop browser rendering.</p><div class="tag">GH Pages</div>
             </a>
-            <a class="card" href="https://paper-io.com" target="_blank">
-                <div class="icon">🧻</div><h3>Paper.io 2</h3>
+            <a class="card" href="https://emulatoros.github.io/" target="_blank">
+                <h3>OS Emulator Array</h3><p>Full suite cloud simulation console dashboard bypassing standard firewalls.</p><div class="tag">GH Pages</div>
             </a>
-            <a class="card" href="https://wings.io" target="_blank">
-                <div class="icon">🛩️</div><h3>Wings.io</h3>
+            <a class="card" href="https://abc6782.github.io/core-html/games.html" target="_blank">
+                <h3>Core HTML Database</h3><p>Minimalist framework providing clean structural execution fields.</p><div class="tag">GH Pages</div>
             </a>
-            <a class="card" href="https://powerline.io" target="_blank">
-                <div class="icon">⚡</div><h3>Powerline.io</h3>
+            <a class="card" href="https://blaizerbrumo.github.io/School-Heaven/public/index.html" target="_blank">
+                <h3>School Heaven Core</h3><p>Stealth student sandbox environment with custom user interface tags.</p><div class="tag">GH Pages</div>
             </a>
-
-            <!-- Sports / Skill -->
-            <a class="card" href="https://github.io" target="_blank">
-                <div class="icon">🏀</div><h3>Basket Random</h3>
-            </a>
-            <a class="card" href="https://github.io" target="_blank">
-                <div class="icon">🏈</div><h3>Retro Bowl</h3>
-            </a>
-            <a class="card" href="https://github.io" target="_blank">
-                <div class="icon">🏍️</div><h3>Moto X3M</h3>
-            </a>
-            <a class="card" href="https://github.io" target="_blank">
-                <div class="icon">🛻</div><h3>Drive Mad</h3>
-            </a>
-
-            <!-- Puzzle / Strategy -->
-            <a class="card" href="https://play2048.co" target="_blank">
-                <div class="icon">🔢</div><h3>2048</h3>
-            </a>
-            <a class="card" href="https://github.io" target="_blank">
-                <div class="icon">🍪</div><h3>Cookie Clicker</h3>
-            </a>
-            <a class="card" href="https://github.io" target="_blank">
-                <div class="icon">♿</div><h3>Happy Wheels</h3>
-            </a>
-            <a class="card" href="https://github.io" target="_blank">
-                <div class="icon">💼</div><h3>BitLife</h3>
-            </a>
-            <a class="card" href="https://github.io" target="_blank">
-                <div class="icon">🟥</div><h3>World's Hardest Game</h3>
-            </a>
-        </div>
-    </div>
-
-    <!-- Hidden Fake Canvas Assignment Page -->
-    <div id="panic-screen">
-        <div class="canvas-sidebar">
-            <div class="canvas-icon-block" style="background: #e02229; border-radius: 50%;"></div><!-- Fake Canvas Logo -->
-            <div class="canvas-icon-block"></div>
-            <div class="canvas-icon-block"></div>
-            <div class="canvas-icon-block"></div>
-            <div class="canvas-icon-block"></div>
-        </div>
-        
-        <div class="canvas-main">
-            <div class="canvas-header">
-                <nav style="font-size: 0.85rem; color: #008ee6; margin-bottom: 10px;">Courses &gt; Algebra II &gt; Assignments</nav>
-                <h1 class="canvas-title">Module 3: Linear Equations Practice</h1>
-            </div>
-
-            <div class="canvas-meta">
-                <span><strong>Due</strong> No Due Date</span>
-                <span><strong>Points</strong> 25</span>
-                <span><strong>Submitting</strong> A Text Entry Box</span>
-            </div>
-
-            <div class="canvas-body">
-                <p>Please review the core concepts in Chapter 4 before attempting this task. Complete the work independently and type your answers in the submission window below.</p>
-                
-                <h3>Instructions:</h3>
-                <p>1. Find the slope of the line passing through the points (2, 5) and (4, 11).</p>
+            <a class="card" href="https://browncha023.github.io/GBA/" target="_blank">
